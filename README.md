@@ -54,7 +54,7 @@ This project serves as a submission tool for the students and professors in the 
   - Install the dependencies using `npm install`
   - Start the react server using `npm start`
 
-## [Link to video] : (urllink)
+## [Link to video] : (https://youtu.be/_B3MiZNFme8)
 
 # TESTING
   - Unit tests are present in the tests folder.
