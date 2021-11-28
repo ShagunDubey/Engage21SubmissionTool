@@ -37,7 +37,7 @@ This project serves as a submission tool for the students and professors in the 
    
 # INSTALLATION STEPS
 - clone the repository using 
-    `git clone <repo_link>`
+    `git clone https://github.com/ShagunDubey/Engage21SubmissionTool.git`
 - open terminal and move to the project directory
 - ## BACKEND 
   - Activate the virtual environment using `pipenv shell`
