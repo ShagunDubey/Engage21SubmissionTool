@@ -43,7 +43,13 @@ function Submission({ submission }) {
           <strong>Submitted by: {submission.student.username}</strong>
         </Card.Text>
         <Card.Text as='div'>
-          <strong>{(submission.marks || submission.comments) ? <>Graded</> : <>Not graded yet</>}</strong>
+          <strong>
+            {submission.marks || submission.comments ? (
+              <>Graded</>
+            ) : (
+              <>Not graded yet</>
+            )}
+          </strong>
         </Card.Text>
         <Link to={`/submission/${submission.id}`}>
           <Card.Text as='div'>

@@ -32,6 +32,7 @@ This project serves as a submission tool for the students and professors in the 
   - Teachers can grade and add comments to each submission.
   - Students can view the score and comments from the faculty.
   - Show whether the assignment was submitted within the deadline or not.
+  - Submission can be deleted by a teacher or the student who made the submission
 
 ### Note: The 'resources' folder contains files for testing purposes.
    
@@ -63,11 +64,10 @@ This project serves as a submission tool for the students and professors in the 
   - To generate an HTML file for the report, run: `coverage html`
 
 # AREAS FOR IMPROVEMENT/ FUTURE UPDATES
-  - Migrate to PostreSQL database
-  - Add options to allow students to delete a submission
+  - Migrate to PostgreSQL database
   - Allow teachers to post MCQ-based questions which can be autograded.
   - Allow teachers to post announcements, on which the students can post comments.
-  - Allow users to reset password, email verification, login using social autentication.
+  - Allow users to reset password, verify email, login using social media account.
   - Store the status of each submission as : pending, submitted, graded.
   - Provide a list of all pending assignments to be submitted by the student on Student Profile screen.
   - Provide a list of all submissions yet to be graded by the teacher on Teacher Profile screen.

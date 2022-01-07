@@ -6,6 +6,7 @@ import Message from '../components/Message';
 import {
   listSubmissionDetails,
   gradeSubmission,
+  deleteSubmission,
 } from '../store/actions/submissionActions';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 
@@ -64,6 +65,16 @@ function SubmissionDetailsScreen() {
       });
     }
   };
+
+  function handleDelete(e) {
+    if (window.confirm('Are you sure you want to delete this submission?')) {
+      dispatch(deleteSubmission(id)).then((status) => {
+        if (status === 200) {
+          navigate(`/assignment/${submission.assignment.id}/submissions`);
+        }
+      });
+    }
+  }
   return (
     <>
       <Container>
@@ -88,6 +99,14 @@ function SubmissionDetailsScreen() {
               </Button>
             </Col>
           )}
+        </Row>
+        <br />
+        <Row>
+          <Col sm={8}>
+            <Button variant='danger' onClick={(e) => handleDelete(e)}>
+              Delete
+            </Button>
+          </Col>
         </Row>
         <br />
         {loading ? (
@@ -115,7 +134,6 @@ function SubmissionDetailsScreen() {
                     {assignment.deadline &&
                       deadline.toLocaleDateString(undefined, options)}
                     {!assignment.deadline && 'No deadline assigned.'}
-                    
                   </Col>
                   <Col sm={4}>Points: {assignment.points}</Col>
                 </Row>
@@ -153,28 +171,32 @@ function SubmissionDetailsScreen() {
                     </Col>
                     <Col sm={9}> {assignment.description}</Col>
                   </Row>
-                
-                <Row>
-                  {assignment.question ? (
-                    <p>
-                      Please follow this link for more details on the
-                      assignment.
-                      <Badge>
-                        <a
-                          href={`http://127.0.0.1:8000${assignment.question}`}
-                          target='_blank'
-                        >
-                          Link
-                        </a>
-                      </Badge>
-                    </p>
-                  ) : (
-                    <></>
-                  )}
-                </Row>
-                <Row>
-                  <Link to = {`/classroom/${assignment.classroom}/assignment/${assignment.id}`}>View assignment</Link>
-                </Row>
+
+                  <Row>
+                    {assignment.question ? (
+                      <p>
+                        Please follow this link for more details on the
+                        assignment.
+                        <Badge>
+                          <a
+                            href={`http://127.0.0.1:8000${assignment.question}`}
+                            target='_blank'
+                          >
+                            Link
+                          </a>
+                        </Badge>
+                      </p>
+                    ) : (
+                      <></>
+                    )}
+                  </Row>
+                  <Row>
+                    <Link
+                      to={`/classroom/${assignment.classroom}/assignment/${assignment.id}`}
+                    >
+                      View assignment
+                    </Link>
+                  </Row>
                 </Row>
                 <Row
                   style={{
@@ -228,7 +250,9 @@ function SubmissionDetailsScreen() {
                   </Col>
                   <Col sm={8}>
                     <strong>
-                      {(submission.marks || submission.comments) ? submission.marks : 'Not graded yet'}
+                      {submission.marks || submission.comments
+                        ? submission.marks
+                        : 'Not graded yet'}
                     </strong>
                   </Col>
                 </Row>

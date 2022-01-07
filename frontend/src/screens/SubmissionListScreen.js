@@ -12,6 +12,7 @@ function SubmissionListScreen() {
   let { id } = useParams();
   let navigate = useNavigate();
   const submissionList = useSelector((state) => state.submissionList);
+  const assignment = useSelector((state) => state.assignmentDetails.assignment)
   const { loading, error, submissions } = submissionList;
   useEffect(() => {
     dispatch(listSubmissions(id));
@@ -28,7 +29,7 @@ function SubmissionListScreen() {
           <>
             <Row>
               <Col sm={8}>
-                <Button onClick={() => navigate(-1)}>Go back</Button>
+                <Button onClick={() => navigate(`/classroom/${assignment.classroom}/assignment/${assignment.id}`)}>Go back</Button>
               </Col>
             </Row>
 

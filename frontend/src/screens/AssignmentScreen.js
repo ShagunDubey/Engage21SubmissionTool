@@ -23,12 +23,16 @@ function AssignmentScreen() {
     dispatch(listAssignmentDetails(id, id_assignment));
   }, [dispatch]);
 
-  let deadline, created_at, updated_at, is_image, has_deadline=false;
+  let deadline,
+    created_at,
+    updated_at,
+    is_image,
+    has_deadline = false;
   if (assignment) {
-    if(assignment.deadline)
-      {deadline = new Date(assignment.deadline);
+    if (assignment.deadline) {
+      deadline = new Date(assignment.deadline);
       has_deadline = true;
-      }
+    }
     created_at = new Date(assignment.created_at);
     updated_at = new Date(assignment.updated_at);
     if (
@@ -61,7 +65,7 @@ function AssignmentScreen() {
       <Container>
         <Row style={{ padding: '2%' }}>
           <Col sm={8}>
-            <Button onClick={() => navigate(-1)}>Go back</Button>
+            <Button onClick={() => navigate(`/classroom/${id}`)}>Go back</Button>
           </Col>
           {is_teacher && (
             <Col sm={4}>
@@ -113,13 +117,15 @@ function AssignmentScreen() {
               <Col sm={8}>
                 <strong style={{ color: 'red' }}>
                   Deadline:&nbsp;
-                  {has_deadline && (deadline.toLocaleTimeString('en-US', {
-                    hour: 'numeric',
-                    minute: 'numeric',
-                    hour12: true,
-                  }))}
+                  {has_deadline &&
+                    deadline.toLocaleTimeString('en-US', {
+                      hour: 'numeric',
+                      minute: 'numeric',
+                      hour12: true,
+                    })}
                   &nbsp;&nbsp;
-                  {has_deadline && deadline.toLocaleDateString(undefined, options)}
+                  {has_deadline &&
+                    deadline.toLocaleDateString(undefined, options)}
                   {!has_deadline && 'No deadline assigned'}
                 </strong>
               </Col>

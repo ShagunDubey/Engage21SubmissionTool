@@ -11,6 +11,9 @@ import {
   SUBMISSION_CREATE_REQUEST,
   SUBMISSION_CREATE_SUCCESS,
   SUBMISSION_CREATE_FAIL,
+  SUBMISSION_DELETE_REQUEST,
+  SUBMISSION_DELETE_SUCCESS,
+  SUBMISSION_DELETE_FAIL
 } from '../constants/submissionConstants';
 
 export const submissionListReducer = (state = { submissions: [] }, action) => {
@@ -59,13 +62,29 @@ export const gradeSubmissionReducer = (state = { submission: {} }, action) => {
 };
 
 export const createSubmissionReducer = (state = {}, action) => {
-  switch(action.type) {
+  switch (action.type) {
     case SUBMISSION_CREATE_REQUEST:
       return { loading: true, ...state };
     case SUBMISSION_CREATE_SUCCESS:
       return { loading: false, submission: action.payload };
     case SUBMISSION_CREATE_FAIL:
       return { loading: false, error: action.payload };
+    default:
+      return state;
+  }
+};
+
+export const deleteSubmissionReducer = (state = {}, action) => {
+  switch (action.type) {
+    case SUBMISSION_DELETE_REQUEST:
+      return { loading: true };
+
+    case SUBMISSION_DELETE_SUCCESS:
+      return { loading: false, success: true };
+
+    case SUBMISSION_DELETE_FAIL:
+      return { loading: false, error: action.payload };
+
     default:
       return state;
   }

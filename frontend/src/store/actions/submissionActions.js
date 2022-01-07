@@ -11,6 +11,9 @@ import {
   SUBMISSION_CREATE_REQUEST,
   SUBMISSION_CREATE_SUCCESS,
   SUBMISSION_CREATE_FAIL,
+  SUBMISSION_DELETE_FAIL,
+  SUBMISSION_DELETE_REQUEST,
+  SUBMISSION_DELETE_SUCCESS
 } from '../constants/submissionConstants';
 import axios from 'axios';
 
@@ -127,3 +130,35 @@ export const createSubmission = (assignment_id, formData) => async (
     });
   }
 };
+
+export const deleteSubmission = (id) => async (dispatch) => {
+  try {
+    dispatch({
+      type: SUBMISSION_DELETE_REQUEST,
+    });
+
+    const config = {
+      headers: {
+        'Content-type': 'application/json',
+      },
+    };
+
+    const { status } = await axios.delete(
+      `/api/submissions/${id}`,
+      config
+    );
+
+    dispatch({
+      type: SUBMISSION_DELETE_SUCCESS,
+    });
+    return status;
+  } catch (error) {
+    dispatch({
+      type: SUBMISSION_DELETE_FAIL,
+      payload:
+        error.response && error.response.data.detail
+          ? error.response.data.detail
+          : error.message,
+    });
+  }
+}

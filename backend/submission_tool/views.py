@@ -275,3 +275,15 @@ class SubmissionDetailsView(LoginRequiredMixin, APIView):
             return Response(serializer.data, status=200)
         else:
             return Response({"message": "Unauthorized"}, status=403)
+
+    def delete(self, request, id):
+        submission = Submission.objects.get(pk=id)
+
+        if request.user.is_teacher or submission.student.id == request.user.id:
+            submission.delete()
+            return Response(
+                data="Submission with id `{}` has been deleted."
+                .format(id), status=200
+            )
+        else:
+            return Response({"message": "Unauthorized"}, status=403)
